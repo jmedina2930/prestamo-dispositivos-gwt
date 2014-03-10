@@ -1,5 +1,5 @@
-20140309220845 ERROR org.springframework.web.context.ContextLoader [initWebApplicationContext] (307) - Context initialization failed
-org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sessionFactory' defined in ServletContext resource [/WEB-INF/spring_configuration.xml]: Invocation of init method failed; nested exception is java.lang.NoClassDefFoundError: org/slf4j/LoggerFactory
+20140310085608 ERROR org.springframework.web.context.ContextLoader [initWebApplicationContext] (307) - Context initialization failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sessionFactory' defined in ServletContext resource [/WEB-INF/spring_configuration.xml]: Invocation of init method failed; nested exception is org.hibernate.HibernateException: Unable to get the default Bean Validation factory
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1466)
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:521)
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:458)
@@ -31,31 +31,35 @@ org.springframework.beans.factory.BeanCreationException: Error creating bean wit
 	at com.google.gwt.dev.DevModeBase.startUp(DevModeBase.java:1093)
 	at com.google.gwt.dev.DevModeBase.run(DevModeBase.java:836)
 	at com.google.gwt.dev.DevMode.main(DevMode.java:311)
-Caused by: java.lang.NoClassDefFoundError: org/slf4j/LoggerFactory
-	at org.hibernate.cfg.Configuration.<clinit>(Configuration.java:197)
-	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
-	at sun.reflect.NativeConstructorAccessorImpl.newInstance(Unknown Source)
-	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(Unknown Source)
-	at java.lang.reflect.Constructor.newInstance(Unknown Source)
-	at org.springframework.beans.BeanUtils.instantiateClass(BeanUtils.java:147)
-	at org.springframework.beans.BeanUtils.instantiateClass(BeanUtils.java:104)
-	at org.springframework.orm.hibernate3.LocalSessionFactoryBean.newConfiguration(LocalSessionFactoryBean.java:821)
-	at org.springframework.orm.hibernate3.LocalSessionFactoryBean.buildSessionFactory(LocalSessionFactoryBean.java:552)
+Caused by: org.hibernate.HibernateException: Unable to get the default Bean Validation factory
+	at org.hibernate.cfg.beanvalidation.BeanValidationActivator.applyDDL(BeanValidationActivator.java:127)
+	at org.hibernate.cfg.Configuration.applyBeanValidationConstraintsOnDDL(Configuration.java:1704)
+	at org.hibernate.cfg.Configuration.applyConstraintsToDDL(Configuration.java:1654)
+	at org.hibernate.cfg.Configuration.secondPassCompile(Configuration.java:1445)
+	at org.hibernate.cfg.Configuration.buildMappings(Configuration.java:1375)
+	at org.springframework.orm.hibernate3.LocalSessionFactoryBean.buildSessionFactory(LocalSessionFactoryBean.java:720)
 	at org.springframework.orm.hibernate3.AbstractSessionFactoryBean.afterPropertiesSet(AbstractSessionFactoryBean.java:188)
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1525)
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1463)
 	... 30 more
-Caused by: java.lang.ClassNotFoundException: org.slf4j.LoggerFactory
-	at java.net.URLClassLoader$1.run(Unknown Source)
-	at java.net.URLClassLoader$1.run(Unknown Source)
-	at java.security.AccessController.doPrivileged(Native Method)
-	at java.net.URLClassLoader.findClass(Unknown Source)
-	at com.google.gwt.dev.shell.jetty.JettyLauncher$WebAppContextWithReload$WebAppClassLoaderExtension.findClass(JettyLauncher.java:372)
-	at org.mortbay.jetty.webapp.WebAppClassLoader.loadClass(WebAppClassLoader.java:366)
-	at org.mortbay.jetty.webapp.WebAppClassLoader.loadClass(WebAppClassLoader.java:337)
-	... 42 more
-20140309221941 ERROR org.springframework.web.context.ContextLoader [initWebApplicationContext] (307) - Context initialization failed
-org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sessionFactory' defined in ServletContext resource [/WEB-INF/spring_configuration.xml]: Invocation of init method failed; nested exception is java.lang.NoClassDefFoundError: org/slf4j/LoggerFactory
+Caused by: java.lang.reflect.InvocationTargetException
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.hibernate.cfg.beanvalidation.BeanValidationActivator.applyDDL(BeanValidationActivator.java:118)
+	... 38 more
+Caused by: org.hibernate.HibernateException: Unable to build the default ValidatorFactory
+	at org.hibernate.cfg.beanvalidation.TypeSafeActivator.getValidatorFactory(TypeSafeActivator.java:383)
+	at org.hibernate.cfg.beanvalidation.TypeSafeActivator.applyDDL(TypeSafeActivator.java:109)
+	... 43 more
+Caused by: javax.validation.ValidationException: Unable to find a default provider
+	at javax.validation.Validation$GenericBootstrapImpl.configure(Validation.java:264)
+	at javax.validation.Validation.buildDefaultValidatorFactory(Validation.java:111)
+	at org.hibernate.cfg.beanvalidation.TypeSafeActivator.getValidatorFactory(TypeSafeActivator.java:380)
+	... 44 more
+20140310093325 ERROR org.springframework.web.context.ContextLoader [initWebApplicationContext] (307) - Context initialization failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sessionFactory' defined in ServletContext resource [/WEB-INF/spring_configuration.xml]: Invocation of init method failed; nested exception is org.hibernate.HibernateException: Unable to get the default Bean Validation factory
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1466)
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:521)
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:458)
@@ -87,82 +91,30 @@ org.springframework.beans.factory.BeanCreationException: Error creating bean wit
 	at com.google.gwt.dev.DevModeBase.startUp(DevModeBase.java:1093)
 	at com.google.gwt.dev.DevModeBase.run(DevModeBase.java:836)
 	at com.google.gwt.dev.DevMode.main(DevMode.java:311)
-Caused by: java.lang.NoClassDefFoundError: org/slf4j/LoggerFactory
-	at org.hibernate.cfg.Configuration.<clinit>(Configuration.java:197)
-	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
-	at sun.reflect.NativeConstructorAccessorImpl.newInstance(Unknown Source)
-	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(Unknown Source)
-	at java.lang.reflect.Constructor.newInstance(Unknown Source)
-	at org.springframework.beans.BeanUtils.instantiateClass(BeanUtils.java:147)
-	at org.springframework.beans.BeanUtils.instantiateClass(BeanUtils.java:104)
-	at org.springframework.orm.hibernate3.LocalSessionFactoryBean.newConfiguration(LocalSessionFactoryBean.java:821)
-	at org.springframework.orm.hibernate3.LocalSessionFactoryBean.buildSessionFactory(LocalSessionFactoryBean.java:552)
+Caused by: org.hibernate.HibernateException: Unable to get the default Bean Validation factory
+	at org.hibernate.cfg.beanvalidation.BeanValidationActivator.applyDDL(BeanValidationActivator.java:127)
+	at org.hibernate.cfg.Configuration.applyBeanValidationConstraintsOnDDL(Configuration.java:1704)
+	at org.hibernate.cfg.Configuration.applyConstraintsToDDL(Configuration.java:1654)
+	at org.hibernate.cfg.Configuration.secondPassCompile(Configuration.java:1445)
+	at org.hibernate.cfg.Configuration.buildMappings(Configuration.java:1375)
+	at org.springframework.orm.hibernate3.LocalSessionFactoryBean.buildSessionFactory(LocalSessionFactoryBean.java:720)
 	at org.springframework.orm.hibernate3.AbstractSessionFactoryBean.afterPropertiesSet(AbstractSessionFactoryBean.java:188)
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1525)
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1463)
 	... 30 more
-Caused by: java.lang.ClassNotFoundException: org.slf4j.LoggerFactory
-	at java.net.URLClassLoader$1.run(Unknown Source)
-	at java.net.URLClassLoader$1.run(Unknown Source)
-	at java.security.AccessController.doPrivileged(Native Method)
-	at java.net.URLClassLoader.findClass(Unknown Source)
-	at com.google.gwt.dev.shell.jetty.JettyLauncher$WebAppContextWithReload$WebAppClassLoaderExtension.findClass(JettyLauncher.java:372)
-	at org.mortbay.jetty.webapp.WebAppClassLoader.loadClass(WebAppClassLoader.java:366)
-	at org.mortbay.jetty.webapp.WebAppClassLoader.loadClass(WebAppClassLoader.java:337)
-	... 42 more
-20140309222034 ERROR org.springframework.web.context.ContextLoader [initWebApplicationContext] (307) - Context initialization failed
-org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sessionFactory' defined in ServletContext resource [/WEB-INF/spring_configuration.xml]: Invocation of init method failed; nested exception is java.lang.NoClassDefFoundError: org/slf4j/LoggerFactory
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1466)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:521)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:458)
-	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:294)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:225)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:291)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:193)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:587)
-	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:932)
-	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:479)
-	at org.springframework.web.context.ContextLoader.configureAndRefreshWebApplicationContext(ContextLoader.java:383)
-	at org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:283)
-	at org.springframework.web.context.ContextLoaderListener.contextInitialized(ContextLoaderListener.java:112)
-	at org.mortbay.jetty.handler.ContextHandler.startContext(ContextHandler.java:543)
-	at org.mortbay.jetty.servlet.Context.startContext(Context.java:136)
-	at org.mortbay.jetty.webapp.WebAppContext.startContext(WebAppContext.java:1220)
-	at org.mortbay.jetty.handler.ContextHandler.doStart(ContextHandler.java:513)
-	at org.mortbay.jetty.webapp.WebAppContext.doStart(WebAppContext.java:448)
-	at com.google.gwt.dev.shell.jetty.JettyLauncher$WebAppContextWithReload.doStart(JettyLauncher.java:468)
-	at org.mortbay.component.AbstractLifeCycle.start(AbstractLifeCycle.java:39)
-	at org.mortbay.jetty.handler.HandlerWrapper.doStart(HandlerWrapper.java:130)
-	at org.mortbay.jetty.handler.RequestLogHandler.doStart(RequestLogHandler.java:115)
-	at org.mortbay.component.AbstractLifeCycle.start(AbstractLifeCycle.java:39)
-	at org.mortbay.jetty.handler.HandlerWrapper.doStart(HandlerWrapper.java:130)
-	at org.mortbay.jetty.Server.doStart(Server.java:222)
-	at org.mortbay.component.AbstractLifeCycle.start(AbstractLifeCycle.java:39)
-	at com.google.gwt.dev.shell.jetty.JettyLauncher.start(JettyLauncher.java:672)
-	at com.google.gwt.dev.DevMode.doStartUpServer(DevMode.java:509)
-	at com.google.gwt.dev.DevModeBase.startUp(DevModeBase.java:1093)
-	at com.google.gwt.dev.DevModeBase.run(DevModeBase.java:836)
-	at com.google.gwt.dev.DevMode.main(DevMode.java:311)
-Caused by: java.lang.NoClassDefFoundError: org/slf4j/LoggerFactory
-	at org.hibernate.cfg.Configuration.<clinit>(Configuration.java:197)
-	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
-	at sun.reflect.NativeConstructorAccessorImpl.newInstance(Unknown Source)
-	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(Unknown Source)
-	at java.lang.reflect.Constructor.newInstance(Unknown Source)
-	at org.springframework.beans.BeanUtils.instantiateClass(BeanUtils.java:147)
-	at org.springframework.beans.BeanUtils.instantiateClass(BeanUtils.java:104)
-	at org.springframework.orm.hibernate3.LocalSessionFactoryBean.newConfiguration(LocalSessionFactoryBean.java:821)
-	at org.springframework.orm.hibernate3.LocalSessionFactoryBean.buildSessionFactory(LocalSessionFactoryBean.java:552)
-	at org.springframework.orm.hibernate3.AbstractSessionFactoryBean.afterPropertiesSet(AbstractSessionFactoryBean.java:188)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1525)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1463)
-	... 30 more
-Caused by: java.lang.ClassNotFoundException: org.slf4j.LoggerFactory
-	at java.net.URLClassLoader$1.run(Unknown Source)
-	at java.net.URLClassLoader$1.run(Unknown Source)
-	at java.security.AccessController.doPrivileged(Native Method)
-	at java.net.URLClassLoader.findClass(Unknown Source)
-	at com.google.gwt.dev.shell.jetty.JettyLauncher$WebAppContextWithReload$WebAppClassLoaderExtension.findClass(JettyLauncher.java:372)
-	at org.mortbay.jetty.webapp.WebAppClassLoader.loadClass(WebAppClassLoader.java:366)
-	at org.mortbay.jetty.webapp.WebAppClassLoader.loadClass(WebAppClassLoader.java:337)
-	... 42 more
+Caused by: java.lang.reflect.InvocationTargetException
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.hibernate.cfg.beanvalidation.BeanValidationActivator.applyDDL(BeanValidationActivator.java:118)
+	... 38 more
+Caused by: org.hibernate.HibernateException: Unable to build the default ValidatorFactory
+	at org.hibernate.cfg.beanvalidation.TypeSafeActivator.getValidatorFactory(TypeSafeActivator.java:383)
+	at org.hibernate.cfg.beanvalidation.TypeSafeActivator.applyDDL(TypeSafeActivator.java:109)
+	... 43 more
+Caused by: javax.validation.ValidationException: Unable to find a default provider
+	at javax.validation.Validation$GenericBootstrapImpl.configure(Validation.java:264)
+	at javax.validation.Validation.buildDefaultValidatorFactory(Validation.java:111)
+	at org.hibernate.cfg.beanvalidation.TypeSafeActivator.getValidatorFactory(TypeSafeActivator.java:380)
+	... 44 more
