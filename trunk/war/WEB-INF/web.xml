@@ -1,24 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE web-app
+    PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+    "http://java.sun.com/dtd/web-app_2_3.dtd">
+    
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
               http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
          version="2.5"
          xmlns="http://java.sun.com/xml/ns/javaee">
+         
+  <!-- Definiendo variable de contexto -->       
+  <context-param>
+      <param-name>contextConfigLocation</param-name>
+      <param-value>WEB-INF/spring_configuration.xml</param-value>
+  </context-param>
+  
+  <listener>
+      <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
 
   <!-- Servlets -->
-  <servlet>
-    <servlet-name>greetServlet</servlet-name>
-    <servlet-class>co.edu.udea.prestamoDispositivos.server.GreetingServiceImpl</servlet-class>
-  </servlet>
-  
-  <servlet-mapping>
-    <servlet-name>greetServlet</servlet-name>
-    <url-pattern>/prestamodispositivosgwt/greet</url-pattern>
-  </servlet-mapping>
   
   <!-- Default page to serve -->
   <welcome-file-list>
-    <welcome-file>PrestamoDispositivosGWT.html</welcome-file>
+    <welcome-file>PrestamoDispositivosGWT.jsp</welcome-file>
   </welcome-file-list>
+  <servlet>
+  	<servlet-name>PrestamoRemoteService</servlet-name>
+  	<servlet-class>co.edu.udea.prestamoDispositivos.server.PrestamoRemoteServiceImpl</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>PrestamoRemoteService</servlet-name>
+  	<url-pattern>/prestamodispositivosgwt/PrestamoRemoteService</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>loginServlet</servlet-name>
+  	<servlet-class>co.edu.udea.prestamoDispositivos.server.LoginServlet</servlet-class>
+  </servlet>
+  
+  <servlet>
+  	<servlet-name>logoutServlet</servlet-name>
+  	<servlet-class>co.edu.udea.prestamoDispositivos.server.LogoutServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>loginServlet</servlet-name>
+  	<url-pattern>login</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+  	<servlet-name>logoutServlet</servlet-name>
+  	<url-pattern>logout</url-pattern>
+  </servlet-mapping>
 
 </web-app>
