@@ -1,5 +1,6 @@
 <!doctype html>
 <%@page import="co.edu.udea.prestamoDispositivos.shared.UsuarioGWT"%>
+
 <html>
   <head>
     <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
@@ -11,8 +12,7 @@
     
   </head>
 	
-  <body>
-  
+  <body>  
   <% 
   		if(session.getAttribute("UsuarioConectado") != null){
   			UsuarioGWT user = (UsuarioGWT)session.getAttribute("UsuarioConectado");
@@ -25,7 +25,7 @@
   			"rol" : "<%=user.getRol()%>"
   		}
   	  	
-  	  	</script>
+  	 </script>
   	  	
   	  	<!-- OPTIONAL: include this if you want history support -->
     <iframe src="javascript:''" id="__gwt_historyFrame" tabIndex='-1' style="position:absolute;width:0;height:0;border:0"></iframe>
