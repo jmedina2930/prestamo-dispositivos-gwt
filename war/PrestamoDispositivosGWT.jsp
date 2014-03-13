@@ -4,12 +4,8 @@
 <html>
   <head>
     <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
-
     <link type="text/css" rel="stylesheet" href="estilos/estilo.css">
-
     <title>Ingreso</title>
-    
-    
   </head>
 	
   <body>  
@@ -26,7 +22,7 @@
   		}
   	  	
   	 </script>
-  	  	
+  	  	<script type="text/javascript" language="javascript" src="prestamodispositivosgwt/prestamodispositivosgwt.nocache.js"></script>
   	  	<!-- OPTIONAL: include this if you want history support -->
     <iframe src="javascript:''" id="__gwt_historyFrame" tabIndex='-1' style="position:absolute;width:0;height:0;border:0"></iframe>
     
