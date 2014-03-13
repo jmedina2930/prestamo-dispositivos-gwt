@@ -1,11 +1,12 @@
 package co.edu.udea.prestamoDispositivos.shared;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import co.edu.udea.PrestamoDispositivos.model.Dispositivo;
 import co.edu.udea.PrestamoDispositivos.model.Usuario;
 
-public class PrestamosListado {
+public class PrestamosListado implements Serializable{
 
 	/**
 	 * codigo cuando se realiza un prestamo
@@ -32,10 +33,29 @@ public class PrestamosListado {
 	 */
 	private String usuario;
 	/**
+	 * referencia a la descripcion del dispositivo prestado
+	 */
+	private String descripcion_dispositivo;
+	
+	/**
+	 * 
+	 * @return retorna la descripcion del dispositivo
+	 */
+	public String getDescripcion_dispositivo() {
+		return descripcion_dispositivo;
+	}
+	
+	/**
+	 * asigna la descripcion de un dispositivo
+	 * @param descripcion_dispositivo
+	 */
+	public void setDescripcion_dispositivo(String descripcion_dispositivo) {
+		this.descripcion_dispositivo = descripcion_dispositivo;
+	}
+	/**
 	 * 
 	 * @return el codigo del prestamo
 	 */
-	
 	public Integer getCodigo_prestamo() {
 		return codigo_prestamo;
 	}
@@ -116,4 +136,5 @@ public class PrestamosListado {
 	public void setEstado_prestamo(String estado_prestamo){
 		this.estado_prestamo = estado_prestamo;
 	}
+	
 }
