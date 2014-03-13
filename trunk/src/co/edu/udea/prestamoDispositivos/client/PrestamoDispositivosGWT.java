@@ -11,20 +11,21 @@ import com.google.gwt.user.client.ui.RootPanel;
  */
 public class PrestamoDispositivosGWT implements EntryPoint {
 	SolicitarPrestamo solicitarPrestamo = null;
-	PrestamosPendientes prestamosPendietes = null;
+	PrestamosPendientes prestamosPendientes = null;
 	/**
 	 * This is the entry point method.
 	 */
 	public void onModuleLoad() {		
 		Dictionary var = Dictionary.getDictionary("userInSession");
 		UsuarioGWT.setUpFromDictionary(var);
+		prestamosPendientes= new PrestamosPendientes();
+		solicitarPrestamo= new SolicitarPrestamo(prestamosPendientes);
+		prestamosPendientes.setSolicitarPrestamo(solicitarPrestamo);
 		
-		solicitarPrestamo= new SolicitarPrestamo();
-		prestamosPendietes= new PrestamosPendientes();
 		
-		prestamosPendietes.setVisible(false);
+		solicitarPrestamo.setVisible(false);
 		
 		RootPanel.get("contenido").add(solicitarPrestamo);
-		RootPanel.get("contenido").add(prestamosPendietes);
+		RootPanel.get("contenido").add(prestamosPendientes);
 	}
 }
