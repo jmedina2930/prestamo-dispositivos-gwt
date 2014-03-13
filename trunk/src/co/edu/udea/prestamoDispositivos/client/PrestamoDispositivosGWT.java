@@ -22,7 +22,7 @@ public class PrestamoDispositivosGWT implements EntryPoint {
 		solicitarPrestamo= new SolicitarPrestamo(prestamosPendientes);
 		prestamosPendientes.setSolicitarPrestamo(solicitarPrestamo);
 		
-		
+//		prestamosPendientes.setVisible(false);
 		solicitarPrestamo.setVisible(false);
 		
 		RootPanel.get("contenido").add(solicitarPrestamo);
