@@ -12,6 +12,7 @@ import com.google.gwt.user.client.ui.RootPanel;
 public class PrestamoDispositivosGWT implements EntryPoint {
 	SolicitarPrestamo solicitarPrestamo = null;
 	PrestamosPendientes prestamosPendientes = null;
+	private UsuarioGWT user;
 	/**
 	 * This is the entry point method.
 	 */
@@ -22,9 +23,11 @@ public class PrestamoDispositivosGWT implements EntryPoint {
 		solicitarPrestamo= new SolicitarPrestamo(prestamosPendientes);
 		prestamosPendientes.setSolicitarPrestamo(solicitarPrestamo);
 		
-//		prestamosPendientes.setVisible(false);
-		solicitarPrestamo.setVisible(false);
-		
+		if (user.getInstancia().getRol().equalsIgnoreCase("administrador")){				
+			solicitarPrestamo.setVisible(false);
+		}else{
+			prestamosPendientes.setVisible(false);
+		}		
 		RootPanel.get("contenido").add(solicitarPrestamo);
 		RootPanel.get("contenido").add(prestamosPendientes);
 	}
