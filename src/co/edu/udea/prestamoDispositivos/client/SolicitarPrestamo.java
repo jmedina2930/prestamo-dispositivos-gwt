@@ -38,23 +38,23 @@ public class SolicitarPrestamo extends Composite {
 	List<Integer> lIdDispositivos = new ArrayList<>();
 	Date date;
 
-	public SolicitarPrestamo(PrestamosPendientes prestamosPendientes){
-		
+	public SolicitarPrestamo(PrestamosPendientes prestamosPendientes){		
 		this.prestamosPendiente = prestamosPendientes;
 		FlexTable tabla = new FlexTable();
 		lBdispositivos = new ListBox();
 		final TextBox textFecha = new TextBox();
 		lBHoraInicial = new ListBox();
 		lBHoraFinal = new ListBox();
-		final DatePicker calendario = new DatePicker();		
-		new UsuarioGWT();
+		final DatePicker calendario = new DatePicker();	
+		
 		user = UsuarioGWT.getInstancia();
 		Button btnSolicitarPrestamo = new Button();
 		
 		btnSolicitarPrestamo.setText("Solicitar prestamo");
 		
 		VerticalPanel verticalPanel = new VerticalPanel();
-		initWidget(verticalPanel);
+		initWidget(verticalPanel);		
+		
 		
 		llenarDispositivos();
 		llenarHorarios();
@@ -75,11 +75,6 @@ public class SolicitarPrestamo extends Composite {
 		verticalPanel.add(tabla);
 		
 		verticalPanel.add(btnSolicitarPrestamo);
-		
-//		if (user.getRol().equalsIgnoreCase("administrador")){			
-//			System.out.println(user.getRol());
-//			mostrarPrestamosPendientes();
-//		}
 
 		calendario.addValueChangeHandler(new ValueChangeHandler<Date>() {
 		      public void onValueChange(ValueChangeEvent<Date> event) {
@@ -144,21 +139,8 @@ public class SolicitarPrestamo extends Composite {
 							
 							@Override
 							public void onSuccess(Void result) {
-								Window.alert("la solicitud de prestamo ha sido enviada satisfactoriamente");
-								
-//								ClienteListado cl = new ClienteListado();
-//								cl.setCedula(txtCedula.getText());
-//								cl.setNombreCompleto(txtNombres.getText() + " " + txtApellidos.getText());
-//								cl.setCorreo(txtCorreo.getText());
-//								
-//								txtCedula.setText("");
-//								txtNombres.setText(""); 
-//								txtApellidos.setText("");
-//								txtCorreo.setText("");
-//								
-//								
-//								lista.agregarCliente(cl);
-//								mostrarListado();
+								Window.alert("la solicitud de prestamo ha sido enviada satisfactoriamente");				
+
 								
 							}
 							
@@ -177,16 +159,9 @@ public class SolicitarPrestamo extends Composite {
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
 	private void mostrarPrestamosPendientes(){		
 		prestamosPendiente.setVisible(true);
-//		this.setVisible(false);
+		this.setVisible(false);
 	}
 
 	public void llenarHorarios(){
