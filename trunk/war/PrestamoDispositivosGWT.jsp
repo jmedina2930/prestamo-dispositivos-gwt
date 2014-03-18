@@ -8,7 +8,8 @@
     <title>Ingreso</title>
   </head>
 	
-  <body>  
+  <body> 
+   <link type="text/css" rel="stylesheet" href="estilos/estilo.css">
   <% 
   		if(session.getAttribute("UsuarioConectado") != null){
   			UsuarioGWT user = (UsuarioGWT)session.getAttribute("UsuarioConectado");

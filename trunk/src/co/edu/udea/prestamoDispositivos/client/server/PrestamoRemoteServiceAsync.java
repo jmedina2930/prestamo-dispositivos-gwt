@@ -9,6 +9,11 @@ import co.edu.udea.prestamoDispositivos.shared.PrestamosListado;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
+/**
+ * interface asincrona de PrestamoRemoteService
+ * @author Jonathan, Andres Ortiz
+ *
+ */
 public interface PrestamoRemoteServiceAsync {
 	void guardarPrestamo(String nUsuario, Date fecha_inicial, Date fecha_final,
 			Integer dispositivo, AsyncCallback<Void> callback);

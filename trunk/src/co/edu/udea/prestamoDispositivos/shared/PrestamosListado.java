@@ -1,11 +1,17 @@
 package co.edu.udea.prestamoDispositivos.shared;
 
 import java.io.Serializable;
+
 import java.util.Date;
 
 import co.edu.udea.PrestamoDispositivos.model.Dispositivo;
 import co.edu.udea.PrestamoDispositivos.model.Usuario;
 
+/**
+ * esta clase se utiliza para mapear el DTO de los prestamos del proyecto de spring
+ * @author Andres ortiz
+ *
+ */
 public class PrestamosListado implements Serializable{
 
 	/**

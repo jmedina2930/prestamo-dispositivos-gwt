@@ -14,8 +14,15 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import co.edu.udea.PrestamoDispositivos.bl.impl.UsuarioBLImpl;
 import co.edu.udea.PrestamoDispositivos.model.Usuario;
+import co.edu.udea.PrestamoDispositivos.util.exception.PrestamoDispositivoException;
+import co.edu.udea.prestamoDispositivos.shared.MyException;
 import co.edu.udea.prestamoDispositivos.shared.UsuarioGWT;
 
+/**
+ * clase usada para procesar el login del usuario, en esta clase se implementan metodos basicos del HTTP
+ * @author Jonathan
+ *
+ */
 public class LoginServlet extends HttpServlet {
 	
 
@@ -32,15 +39,26 @@ public class LoginServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		
-		procesarLogin(request, response);
+		try {
+			procesarLogin(request, response);
+		} catch (MyException e) {
+			e.getMessage();
+		}
 		
 		String referer = request.getHeader("referer");
 		
 		response.sendRedirect(referer);
 	}
 	
-	
-	protected void procesarLogin(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
+	/**
+	 * metodo usado para obtener las credenciales del usuario y validarlas con el sistema
+	 * @param request
+	 * @param response
+	 * @throws ServletException
+	 * @throws IOException
+	 * @throws MyException
+	 */
+	protected void procesarLogin(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException, MyException {
 		
 		String userName = request.getParameter("usuario");
 		
@@ -69,15 +87,18 @@ public class LoginServlet extends HttpServlet {
 				sesion.setAttribute("DatosInvalidos", "Usuario o contraseña no valido");
 				System.out.println("Usuario o contraseña no valido");
 			}
-		}catch(Exception e){
+		}catch(PrestamoDispositivoException e){
 			sesion.setAttribute("UsuarioConectado", null);
 			sesion.setAttribute("DatosInvalidos", "Ocurrio un error validando los datos del usuario");
-			e.printStackTrace();
+			throw new MyException(e.getMessage());
 		}
 		
 	}
 	
-	
+	/**
+	 * metodo usado para obtener el bean de usuario
+	 * @return el bean de usuario
+	 */
 	public UsuarioBLImpl getUsuarioService(){
 		
 		ServletContext sc = getServletContext();

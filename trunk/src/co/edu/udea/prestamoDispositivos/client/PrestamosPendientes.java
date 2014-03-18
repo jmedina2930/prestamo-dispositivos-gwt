@@ -15,11 +15,19 @@ import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
+/**
+ * esta clase es la vista de los prestamos pendientes
+ * @author Jonathan
+ *
+ */
 public class PrestamosPendientes extends Composite{
 
 	SolicitarPrestamo solicitarPrestamo;	
 	FlexTable tabla = new FlexTable();
 	
+	/**
+	 * constructor de la clase, en este se crean los widgets y demas componentes usados en la vista
+	 */
 	public PrestamosPendientes(){
 		VerticalPanel verticalPanel = new VerticalPanel();
 		initWidget(verticalPanel);		
@@ -34,7 +42,7 @@ public class PrestamosPendientes extends Composite{
 		tabla.setText(0, 2, "Nombre dispositivo");
 		tabla.setText(0, 3, "Usuario");
 		tabla.setText(0, 4, "Fecha inicial");
-		tabla.setText(0, 5, "Fecha final");
+		tabla.setText(0, 5, "Fecha final");		
 		
 		
 		
@@ -45,8 +53,9 @@ public class PrestamosPendientes extends Composite{
 		tabla.getCellFormatter().setWidth(0, 4, "200px");
 		tabla.getCellFormatter().setWidth(0, 5, "200px");
 		
-		tabla.getRowFormatter().addStyleName(0, "tablaHeader");
+		tabla.getRowFormatter().addStyleName(0, "tabla.header");
 		
+		//llamado al metodo asincrono ver prestamos pendientes
 		PrestamoRemoteService.Util.getInstance().verPrestamosPendientes(new AsyncCallback<List<PrestamosListado>>(){
 			
 			@Override
@@ -55,27 +64,38 @@ public class PrestamosPendientes extends Composite{
 				if(result.size() == 0)
 					mostrarMensaje("No hay prestamos pendientes en la base de datos");
 				
-				for(PrestamosListado prestamo : result){
-					System.out.println("Hola"+prestamo.getCodigo_prestamo());
+				for(PrestamosListado prestamo : result){					
 					agregarPrestamo(prestamo);
 				}
 			}
 			
 			@Override
-			public void onFailure(Throwable caught) {
-				System.out.println("error");
+			public void onFailure(Throwable caught) {				
 				mostrarMensaje(caught.getMessage());
 			}
 		});
 	}
 	
+	/**
+	 * metodo usado para mostrar una ventana con un mensaje
+	 * @param mensaje que se desea mostrar
+	 */
 	private void mostrarMensaje(String mensaje){
 		Window.alert(mensaje);
 	}
+	
+	/**
+	 * metodo usado para asignar una solicitud de un prestamo
+	 * @param solicitarPrestamo solicitud de prestamo que se desea asignar
+	 */
 	public void setSolicitarPrestamo(SolicitarPrestamo solicitarPrestamo){
 		this.solicitarPrestamo = solicitarPrestamo;
 	}
 	
+	/**
+	 * metodo usado para agregar un prestamo
+	 * @param prestamo es el prestamo que se desea agregar
+	 */
 	public void agregarPrestamo(final PrestamosListado prestamo){		
 		final int indice = tabla.getRowCount();
 				
