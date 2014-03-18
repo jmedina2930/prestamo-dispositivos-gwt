@@ -8,6 +8,7 @@ import com.google.gwt.user.client.ui.RootPanel;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
+ * @author Yamit
  */
 public class PrestamoDispositivosGWT implements EntryPoint {
 	SolicitarPrestamo solicitarPrestamo = null;

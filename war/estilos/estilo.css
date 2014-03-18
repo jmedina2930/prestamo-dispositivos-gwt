@@ -1,34 +1,87 @@
-/** Add css rules here for your application. */
-
-
-/** Example rules used by the template application (remove for your app) */
-h1 {
-  font-size: 2em;
-  font-weight: bold;
-  color: #777777;
-  margin: 40px 0px 70px;
-  text-align: center;
+html, body
+{
+	height: 100%;
 }
 
-.sendButton {
-  display: block;
-  font-size: 16pt;
+body
+{
+	margin: 0px;
+	padding: 0px;
+	background: #87CEEB;
+	background-image:url("estilos\udea.jpg");
+	font-family: 'Source Sans Pro', sans-serif;
+	font-size: 18pt;
+	font-weight: 300;
+	color: #091FE4
 }
 
-/** Most GWT widgets already have a style name defined */
-.gwt-DialogBox {
-  width: 400px;
+ table, table td, table tr {
+    padding:0px;
+    border-spacing: 0px;
+}
+ 
+table {
+    border:1px black solid;
+    border-radius:5px;
+    min-width:400px;
+    font-family: Helvetica,Arial;
+}
+ 
+table td {
+    padding:6px;
+}
+ 
+table tr:first-child td:first-child {
+    border-radius:5px 0px 0px 0px;
+}
+ 
+table tr:first-child td:last-child {
+    border-radius:0px 5px 0px 0px;
+}
+ 
+table tr:last-child td:first-child {
+    border-radius:0px 0px 0px 5px;
+}
+ 
+table tr:last-child td:last-child {
+    border-radius:0px 0px 5px 0px;
+}
+ 
+table td:not(:last-child) {
+    border-right:1px #666 solid;
+}
+ 
+ 
+table tr:nth-child(2n) {
+    background: #87CEEB;
+}
+ 
+table tr:nth-child(2n+1){
+    background: #ADD8E6;
+}
+ 
+table.header tr:not(:first-child):hover, table:not(.header) tr:hover {
+    background:#E0FFFF;
+}
+ 
+table:not(.header) tr {
+    text-align: left;
+}
+ 
+table.header tr:first-child {
+	text-align: center;
+    font-weight: bold;
+    color:#fff;
+    background-color: #444;
+    border-bottom:1px #000 solid;
+}
+ 
+table.header tr:nth-child(n+2) {
+    text-align: right;
 }
 
-.dialogVPanel {
-  margin: 5px;
-}
+ 
 
-.serverResponseLabelError {
-  color: red;
-}
 
-/** Set ids using widget.getElement().setId("idOfElement") */
-#closeButton {
-  margin: 15px 6px 6px;
-}
+
+

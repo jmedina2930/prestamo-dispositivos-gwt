@@ -32,17 +32,27 @@ import co.edu.udea.PrestamoDispositivos.model.Prestamo;
 import co.edu.udea.PrestamoDispositivos.util.exception.PrestamoDispositivoException;
 import co.edu.udea.prestamoDispositivos.client.server.PrestamoRemoteService;
 import co.edu.udea.prestamoDispositivos.shared.DispositivoListado;
+import co.edu.udea.prestamoDispositivos.shared.MyException;
 import co.edu.udea.prestamoDispositivos.shared.PrestamosListado;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
+/**
+ * clase utilizada para implementar los metodos de la logica del negocio definidos en PrestamoRemoteService
+ * @author Jonathan, Andres Ortiz
+ *
+ */
 @SuppressWarnings("serial")
 public class PrestamoRemoteServiceImpl extends RemoteServiceServlet implements PrestamoRemoteService {
 	
 
+	/**
+	 * es la implementacion del metodo usado para guardar un prestamo
+	 * 
+	 */
 	@Override
 	public void guardarPrestamo(String nUsuario, Date fecha_inicial,
-			Date fecha_final, Integer id_dispositivo) {
+			Date fecha_final, Integer id_dispositivo) throws MyException {
 		
 		ServletContext sc = getServletContext();
 		ApplicationContext webApp = WebApplicationContextUtils.getWebApplicationContext(sc);
@@ -56,13 +66,17 @@ public class PrestamoRemoteServiceImpl extends RemoteServiceServlet implements P
 			Dispositivo dispositivo = dispositivoBL.obtenerPorId(id_dispositivo);
 			prestamoBL.guardar(nUsuario, fecha_inicial, fecha_final, "pendiente", dispositivo);
 		}catch(PrestamoDispositivoException e){
-			e.getStackTrace();
+			throw new MyException(e.getMessage());
+			
 		}
 		
 	}
 
+	/**
+	 * es la implementacion del metodo usado para listar los prestamos pendientes
+	 */
 	@Override
-	public List<PrestamosListado> verPrestamosPendientes() {
+	public List<PrestamosListado> verPrestamosPendientes() throws MyException {
 		List<PrestamosListado> prestamosListado = new ArrayList<PrestamosListado>();		
 		List<Prestamo> prestamos = null;
 		ServletContext sc = getServletContext();
@@ -88,14 +102,18 @@ public class PrestamoRemoteServiceImpl extends RemoteServiceServlet implements P
 				prestamosListado.add(prestamoL);
 			}
 		}catch(PrestamoDispositivoException e){
-			e.getStackTrace();
+			throw new MyException(e.getMessage());
 		}
 		return prestamosListado;
 		
 	}
-
+	
+	
+/**
+ * es la implementacion del metodo usado para obtener la lista de dispositivos
+ */
 	@Override
-	public List<DispositivoListado> obtenerDispositivos() {
+	public List<DispositivoListado> obtenerDispositivos() throws MyException  {
 		
 		List<Dispositivo> dispositivos = null;
 		List<DispositivoListado> listadoDispositivos = new ArrayList<DispositivoListado>();		
@@ -120,7 +138,7 @@ public class PrestamoRemoteServiceImpl extends RemoteServiceServlet implements P
 				listadoDispositivos.add(dispositivoL);
 			}
 		}catch(PrestamoDispositivoException e){
-			e.getStackTrace();
+			throw new MyException(e.getMessage());
 		}
 		return listadoDispositivos;
 	}
