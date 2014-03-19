@@ -1,0 +1,2 @@
+serviceClass: co.edu.udea.prestamoDispositivos.client.server.PrestamoRemoteService
+path: AC368ADAB88F200E766CFD66798BF59D.gwt.rpc
