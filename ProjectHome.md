@@ -1,0 +1,1 @@
+creacion de la vista con gwt e integracion con el proyecto anterior de spring
